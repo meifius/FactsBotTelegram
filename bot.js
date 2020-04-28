@@ -2,7 +2,7 @@
 
 // CREATE A BOT from TELEGRAM
 // name : FactsBot ; username : facts_2020_bot
-const TOKEN = '1207041453:AAEEnTUcBCsHa7XDd_hclfgg30_mQIHnkrg';
+const TOKEN = process.env.TOKEN;
 
 // IMPORT
 const Telegraf = require('telegraf');
