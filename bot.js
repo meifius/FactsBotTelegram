@@ -45,6 +45,7 @@ async function getData() {
     // console.log(dataStore);
   } catch (err) {
     console.log(err);
+    throw new Error;
   }
 }
 
@@ -55,6 +56,17 @@ const bot = new Telegraf(TOKEN);
 // start and help command
 bot.command(['start', 'help'], ctx => {
     ctx.reply(helpText);
+});
+
+// update command
+bot.command('update', async ctx => {
+    try {
+        await getData();
+        ctx.reply('update');
+    } catch (error) {
+        console.log(error);
+        ctx.reply('Error');
+    }
 });
 
 // fact command
@@ -71,12 +83,12 @@ bot.command('fact', ctx => {
   
     let message =
       `
-  Fact #${fact.row}:
-  ${fact.val}
+    Fact #${fact.row}:
+    ${fact.val}
     `;
   
     ctx.reply(message);
-  })
+})
 
 // LISTENING
 bot.launch();
