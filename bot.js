@@ -21,6 +21,8 @@ FACTS BOT
 
 /start -
 /help - 
+/fact -
+/update - 
 `
 
 // VARIABLES
