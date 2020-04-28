@@ -1,0 +1,23 @@
+{
+  "name": "FactsBotTelegram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meifius/FactsBotTelegram.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meifius/FactsBotTelegram/issues"
+  },
+  "homepage": "https://github.com/meifius/FactsBotTelegram#readme",
+  "dependencies": {
+    "telegraf": "^3.33.3"
+  }
+}
