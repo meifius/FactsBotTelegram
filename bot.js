@@ -58,9 +58,20 @@ bot.command(['start', 'help'], ctx => {
 bot.command('fact', ctx => {
     let maxRow = dataStore.filter(item => {
         return (item.row == '1' && item.column == '2');
-    })[0].value
+    })[0].value;
 
-    console.log(maxRow);
+    let k = Math.floor(Math.random() * maxRow) + 1;
+
+    let fact = dataStore.filter(item => {
+        return(item.row == k && item.column == '5');
+    })[0];
+
+    let message = `
+    Fact #${fact.row}:
+    ${fact.value}
+    `;
+
+    ctx.reply(message);
 });
 
 // LISTENING
