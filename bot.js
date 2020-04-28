@@ -6,6 +6,7 @@
 
 // CREATE A BOT from TELEGRAM
 // name : FactsBot ; username : facts_2020_bot
+// const TOKEN = process.env.TOKEN;
 const TOKEN = process.env.TOKEN;
 
 // IMPORT
@@ -28,21 +29,23 @@ let dataStore = [];
 // FUNCTIONs
 getData();
 
-async function getData(){
-    try {
-        let res = await axios(LINK);
-        let data = res.data.feed.entry;
-
-        data.forEach(item => {
-            dataStore.push({
-                row : item.gs$cell.row,
-                column : item.gs$cell.column,
-                value : item.gs$cell.inputValue,
-            });
-        });
-    } catch (error) {
-        console.log(error);
-    }
+async function getData() {
+  try {
+    let res = await axios(LINK);
+    // console.log(res.data.feed.entry);
+    let data = res.data.feed.entry;
+    dataStore = [];
+    data.forEach(item => {
+      dataStore.push({
+        row: item.gs$cell.row,
+        col: item.gs$cell.col,
+        val: item.gs$cell.inputValue,
+      })
+    })
+    // console.log(dataStore);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 // Create an object from the Telegraf Class
@@ -57,22 +60,23 @@ bot.command(['start', 'help'], ctx => {
 // fact command
 bot.command('fact', ctx => {
     let maxRow = dataStore.filter(item => {
-        return (item.row == '1' && item.column == '2');
-    })[0].value;
-
+      return (item.row == '1' && item.col == '2');
+    })[0].val;
+  
     let k = Math.floor(Math.random() * maxRow) + 1;
-
+  
     let fact = dataStore.filter(item => {
-        return(item.row == k && item.column == '5');
+      return (item.row == k && item.col == '5');
     })[0];
-
-    let message = `
-    Fact #${fact.row}:
-    ${fact.value}
+  
+    let message =
+      `
+  Fact #${fact.row}:
+  ${fact.val}
     `;
-
+  
     ctx.reply(message);
-});
+  })
 
 // LISTENING
 bot.launch();
